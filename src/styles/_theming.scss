@@ -1,0 +1,84 @@
+@use 'sass:map';
+
+// 1. Font Configuration
+$font-family-base: 'Inter', sans-serif;
+
+// 2. Theme Color Palettes
+$themes: (
+  // --- Dark Theme (Default) ---
+  dark: (
+    // Backgrounds
+    page-bg: #032e5f,
+    header-bg: #1a202d,
+    footer-bg: #1a202d,
+    card-bg: #1a202d,
+    modal-bg: #2a2a3e,
+    button-bg: #00c853,
+    button-hover-bg: #00a746,
+
+    // Text Colors
+    header-text: #ffffff,
+    page-text: #c5c5c5,
+    footer-text: #a0a0a0,
+    button-text: #ffffff,
+
+    // Borders and Dividers
+    border-color: #2c3649
+  ),
+
+  // --- Light Theme ---
+  light: (
+    // Backgrounds
+    page-bg: #f4f6f8,
+    header-bg: #ffffff,
+    footer-bg: #ffffff,
+    card-bg: #ffffff,
+    modal-bg: #e9ecef,
+    button-bg: #007bff,
+    button-hover-bg: #0056b3,
+
+    // Text Colors
+    header-text: #212529,
+    page-text: #495057,
+    footer-text: #6c757d,
+    button-text: #ffffff,
+
+    // Borders and Dividers
+    border-color: #dee2e6
+  )
+);
+
+// This variable will hold the theme map for the current scope.
+$theme-map: null;
+
+// 3. Mixin to Apply Themes
+@mixin themify($themes-map, $is-root: false) {
+  @each $theme, $map in $themes-map {
+    // If the theme is being applied to the root element (body), we use `&.theme-class`
+    // to generate `body.theme-dark`. Otherwise, for components, we use `.theme-class &`
+    // to generate `.theme-dark .component-selector` for descendant styling.
+    @if $is-root {
+      &.theme-#{$theme} {
+        $theme-map: $map !global;
+        @content;
+        $theme-map: null !global;
+      }
+    } @else {
+      // Use :host-context for modern Angular component theming. This ensures that
+      // styles are applied correctly when the theme class is on an ancestor element (like body).
+      :host-context(.theme-#{$theme}) & {
+        $theme-map: $map !global;
+        @content;
+        $theme-map: null !global;
+      }
+    }
+  }
+}
+
+// 4. Function to Get Theme Variables
+@function themed($key) {
+  @if not $theme-map {
+    @error 'themed() may only be called from within the `themify` mixin.';
+  }
+  @return map.get($theme-map, $key);
+}

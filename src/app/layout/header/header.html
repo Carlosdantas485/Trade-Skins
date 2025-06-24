@@ -1,0 +1,20 @@
+<mat-toolbar color="primary">
+  <a href="/">
+    <img src="/assets/logo3.png" alt="NeoSkins Logo" class="logo-image">
+  </a>
+
+  <nav class="main-nav">
+    <a mat-button href="#">Skins</a>
+    <a mat-button href="#">Trade</a>
+    <a mat-button href="#">Sell</a>
+  </nav>
+
+  <span class="spacer"></span>
+
+  <div class="header-actions">
+    <button mat-icon-button (click)="toggleTheme()" aria-label="Toggle theme">
+      <mat-icon>{{ isDarkTheme() ? 'light_mode' : 'dark_mode' }}</mat-icon>
+    </button>
+    <button mat-flat-button color="accent">Login with Steam</button>
+  </div>
+</mat-toolbar>

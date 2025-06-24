@@ -1,1 +1,22 @@
-/* You can add global styles to this file, and also import other style files */
+@use 'styles/theming' as theming;
+@use 'styles/material-theme' as material;
+
+// Apply base font and theme to the whole application
+body {
+  font-family: theming.$font-family-base;
+  margin: 0;
+  padding-top: 80px; // Match the desktop header height
+
+  // Apply the theme to the body element
+  @include theming.themify(theming.$themes, $is-root: true) {
+    background-color: theming.themed('page-bg');
+    color: theming.themed('page-text');
+  }
+}
+
+// Adjust body padding for the smaller mobile header
+@media (max-width: 768px) {
+  body {
+    padding-top: 60px;
+  }
+}

@@ -1,0 +1,197 @@
+@use '../../../styles/theming' as theming;
+
+.trade-page-container {
+  margin-top: 20px;
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+  @include theming.themify(theming.$themes) {
+    background-color: theming.themed('page-bg');
+    color: theming.themed('page-text');
+
+    .trade-panel, .filters-sidebar {
+      background-color: theming.themed('card-bg');
+      border: 1px solid theming.themed('border-color');
+    }
+
+    input[type="text"], .filter-btn {
+      background-color: theming.themed('page-bg');
+      border: 1px solid theming.themed('border-color');
+      color: theming.themed('page-text');
+    }
+
+    .item-card {
+      background-color: theming.themed('page-bg');
+      border: 1px solid theming.themed('border-color');
+      .item-info p {
+        color: theming.themed('footer-text');
+      }
+      .price {
+        color: theming.themed('header-text');
+      }
+    }
+
+    .filter-buttons {
+      .reset-btn {
+        background-color: theming.themed('page-bg');
+        color: theming.themed('page-text');
+      }
+      .save-btn {
+        background-color: theming.themed('button-bg');
+        color: theming.themed('button-text');
+      }
+    }
+  }
+}
+
+.trade-panel {
+  border-radius: 8px;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+
+  .panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+
+    h3 {
+      margin: 0;
+      font-size: 1.2rem;
+    }
+
+    .price-total {
+      font-weight: bold;
+    }
+  }
+
+  .panel-controls {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+
+    input[type="text"] {
+      flex-grow: 1;
+      border-radius: 4px;
+      padding: 8px 12px;
+    }
+
+    .filter-btn {
+      padding: 8px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+  }
+
+  .item-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 190px);
+    gap: 15px;
+    overflow-y: auto;
+    flex-grow: 1;
+    justify-content: center;
+
+    .item-card {
+      border-radius: 6px;
+      padding: 10px;
+      text-align: center;
+
+      img {
+        max-width: 100%;
+        height: auto;
+        margin-bottom: 10px;
+      }
+
+      .item-info {
+        p {
+          margin: 0;
+          font-size: 0.8rem;
+        }
+
+        .price {
+          font-weight: bold;
+          font-size: 0.9rem;
+        }
+      }
+
+      &.special-card {
+        background: linear-gradient(135deg, #8e44ad, #6a4c9c);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        color: white;
+        font-weight: bold;
+
+        .special-content {
+          .money-icon {
+            font-size: 2rem;
+            margin: 5px 0;
+          }
+        }
+      }
+    }
+  }
+}
+
+.filters-sidebar {
+  width: 300px;
+  flex-shrink: 0;
+  border-radius: 8px;
+  padding: 15px;
+
+  .filters-header h4 {
+    margin-top: 0;
+    margin-bottom: 20px;
+  }
+
+  .filter-group {
+    margin-bottom: 20px;
+
+    label {
+      display: block;
+      margin-bottom: 10px;
+      font-weight: bold;
+      font-size: 0.9rem;
+    }
+
+    .price-inputs {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+
+      input {
+        width: 100%;
+        border-radius: 4px;
+        padding: 8px;
+      }
+    }
+
+    .checkbox-row {
+      display: flex;
+      align-items: center;
+      margin-top: 10px;
+
+      input[type="checkbox"] {
+        margin-right: 10px;
+      }
+    }
+  }
+
+  .filter-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+
+    button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+  }
+}

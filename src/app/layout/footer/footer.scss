@@ -1,0 +1,35 @@
+@use '../../../styles/theming' as theming;
+
+.app-footer {
+  padding: 20px 30px;
+  margin-top: 30px;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+
+  @include theming.themify(theming.$themes) {
+    background-color: theming.themed('footer-bg');
+    color: theming.themed('footer-text');
+    border-top: 1px solid theming.themed('border-color');
+
+    .footer-links a {
+      color: theming.themed('footer-text');
+      &:hover {
+        color: theming.themed('header-text'); // Use header-text for a brighter hover
+      }
+    }
+  }
+
+  .footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .footer-links a {
+    margin-left: 20px;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+}
+

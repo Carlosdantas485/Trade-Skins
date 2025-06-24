@@ -1,0 +1,67 @@
+<div class="trade-page-container">
+  <!-- Your Offer Panel -->
+  <div class="trade-panel your-offer">
+    <div class="panel-header">
+      <h3>Sua oferta</h3>
+      <div class="price-total">R$ 0</div>
+    </div>
+    <div class="panel-controls">
+      <input type="text" placeholder="Busca..." />
+      <button class="filter-btn">Preço: Máx. <i class="arrow down"></i></button>
+    </div>
+    <div class="item-grid">
+      <!-- Placeholder Items -->
+      <app-skin-card *ngFor="let skin of [1,2,3,4,5,6,7,8,9,10,11,12]" />
+    </div>
+  </div>
+
+  <!-- Filters Sidebar -->
+  <div class="filters-sidebar">
+    <div class="filters-header">
+      <h4>Filtros salvos</h4>
+    </div>
+    <div class="filter-group">
+      <label>Preço</label>
+      <div class="price-inputs">
+        <input type="text" value="R$ 0.00" />
+        <span>-</span>
+        <input type="text" value="R$ ∞" />
+      </div>
+      <div class="checkbox-row">
+        <input type="checkbox" id="match-balance" />
+        <label for="match-balance">De acordo com meu saldo</label>
+      </div>
+    </div>
+    <div class="filter-group">
+      <label>Tipo</label>
+    </div>
+    <div class="filter-group">
+      <label>Exterior</label>
+    </div>
+    <div class="filter-buttons">
+      <button class="reset-btn">RESETAR</button>
+      <button class="save-btn">SALVAR</button>
+    </div>
+  </div>
+
+  <!-- You Receive Panel -->
+  <div class="trade-panel you-receive">
+    <div class="panel-header">
+      <h3>Você recebe</h3>
+      <div class="price-total">R$ 0</div>
+    </div>
+    <div class="panel-controls">
+      <input type="text" placeholder="Busca..." />
+      <button class="filter-btn">
+        Ordenação padrão <i class="arrow down"></i>
+      </button>
+    </div>
+    
+    <div class="item-grid">
+      <!-- Placeholder Items -->
+      <app-skin-card *ngFor="let skin of [1,2,3,4,5,6,7,8,9,10,11,12]" />
+    </div>
+  </div>
+
+  
+</div>
