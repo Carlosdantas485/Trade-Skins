@@ -1,4 +1,5 @@
 @use '@angular/material' as mat;
+
 // Include the common styles for Angular Material. We include this here so that you only
 // have to load a single css file for Angular Material in your app.
 // Be sure that you only ever include this mixin once!
@@ -7,14 +8,14 @@
 // Define the palettes for your theme using the Material Design palettes.
 // For each palette, you can optionally specify a default, lighter, and darker
 // hue.
-$neo-skins-primary: mat.define-palette(mat.$blue-palette, 500, 100, 700);
-$neo-skins-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+$neo-skins-primary: mat.m2-define-palette(mat.$m2-blue-palette, 500, 100, 700);
+$neo-skins-accent: mat.m2-define-palette(mat.$m2-pink-palette, A200, A100, A400);
 
 // The warn palette is optional (defaults to red).
-$neo-skins-warn: mat.define-palette(mat.$red-palette);
+$neo-skins-warn: mat.m2-define-palette(mat.$m2-red-palette);
 
 // Create the theme object (a Sass map containing color and typography options).
-$neo-skins-light-theme: mat.define-light-theme((
+$neo-skins-light-theme: mat.m2-define-light-theme((
   color: (
     primary: $neo-skins-primary,
     accent: $neo-skins-accent,
@@ -22,7 +23,7 @@ $neo-skins-light-theme: mat.define-light-theme((
   )
 ));
 
-$neo-skins-dark-theme: mat.define-dark-theme((
+$neo-skins-dark-theme: mat.m2-define-dark-theme((
   color: (
     primary: $neo-skins-primary,
     accent: $neo-skins-accent,
