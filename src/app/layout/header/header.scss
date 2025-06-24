@@ -4,6 +4,19 @@
   vertical-align: middle;
 }
 
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.main-nav a,
+.header-actions button[mat-flat-button] {
+  mat-icon {
+    margin-right: 6px;
+  }
+}
+
 .spacer {
   flex: 1 1 auto;
 }

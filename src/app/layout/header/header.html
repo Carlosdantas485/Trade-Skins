@@ -4,17 +4,29 @@
   </a>
 
   <nav class="main-nav">
-    <a mat-button href="#">Skins</a>
-    <a mat-button href="#">Trade</a>
-    <a mat-button href="#">Sell</a>
+    <a mat-button href="#">
+      <mat-icon>style</mat-icon>
+      <span>Skins</span>
+    </a>
+    <a mat-button href="#">
+      <mat-icon>swap_horiz</mat-icon>
+      <span>Trade</span>
+    </a>
+    <a mat-button href="#">
+      <mat-icon>sell</mat-icon>
+      <span>Sell</span>
+    </a>
   </nav>
 
   <span class="spacer"></span>
 
   <div class="header-actions">
     <button mat-icon-button (click)="toggleTheme()" aria-label="Toggle theme">
-      <mat-icon>{{ isDarkTheme() ? 'light_mode' : 'dark_mode' }}</mat-icon>
+      <mat-icon>{{ isDarkMode ? 'light_mode' : 'dark_mode' }}</mat-icon>
     </button>
-    <button mat-flat-button color="accent">Login with Steam</button>
+    <button mat-flat-button color="accent">
+      <mat-icon>login</mat-icon>
+      <span>Login with Steam</span>
+    </button>
   </div>
 </mat-toolbar>
