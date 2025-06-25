@@ -6,12 +6,38 @@
       <div class="price-total">R$ 0</div>
     </div>
     <div class="panel-controls">
-      <input type="text" placeholder="Busca..." />
+      <input type="text" placeholder="Busca..." (input)="onSearch($event)" />
       <button class="filter-btn">Preço: Máx. <i class="arrow down"></i></button>
     </div>
-    <div class="item-grid">
-      <!-- Placeholder Items -->
-      <app-skin-card *ngFor="let skin of [1,2,3,4,5,6,7,8,9,10,11,12]" />
+    
+    <!-- Loading State -->
+    <div *ngIf="isLoading" class="loading-state">
+      <div class="spinner"></div>
+      <p>Carregando seu inventário...</p>
+    </div>
+    
+    <!-- Error State -->
+    <div *ngIf="error && !isLoading" class="error-state">
+      <p>{{ error }}</p>
+      <button (click)="loadUserInventory()" class="retry-button">Tentar novamente</button>
+    </div>
+    
+    <!-- Inventory Grid -->
+    <div class="item-grid" *ngIf="!isLoading && !error">
+      <ng-container *ngIf="userInventory.length > 0; else emptyState">
+        <app-skin-card 
+          *ngFor="let skin of userInventory" 
+          [skin]="skin" 
+          (click)="onSkinSelect(skin)"
+        />
+      </ng-container>
+      
+      <ng-template #emptyState>
+        <div class="empty-state">
+          <p>Seu inventário está vazio</p>
+          <button routerLink="/market" class="browse-button">Procurar itens</button>
+        </div>
+      </ng-template>
     </div>
   </div>
 
@@ -58,8 +84,19 @@
     </div>
     
     <div class="item-grid">
-      <!-- Placeholder Items -->
-      <app-skin-card *ngFor="let skin of skins" [skin]="skin" />
+      <ng-container *ngIf="filteredInventory.length > 0; else emptyReceiveState">
+        <app-skin-card 
+          *ngFor="let skin of filteredInventory" 
+          [skin]="skin"
+          (click)="onSkinSelect(skin)"
+        />
+      </ng-container>
+      
+      <ng-template #emptyReceiveState>
+        <div class="empty-state">
+          <p>Nenhum item para exibir</p>
+        </div>
+      </ng-template>
     </div>
   </div>
 
