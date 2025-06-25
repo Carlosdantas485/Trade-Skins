@@ -8,8 +8,9 @@
 .skin-card {
   border-radius: 8px;
   overflow: hidden;
-  width: 190px;
-  height: 320px; // Set a fixed height
+  width: 200px;
+  height: 320px;
+  margin-top: 5px; // Set a fixed height
   display: flex;
   flex-direction: column;
   transition: background-color 0.3s ease, border-color 0.3s ease;
@@ -24,10 +25,6 @@
     border: 1px solid theming.themed('border-color');
     color: theming.themed('page-text');
 
-    .card-header {
-      background-color: theming.themed('header-bg');
-    }
-
     .skin-image-container {
       background-color: theming.themed('page-bg');
     }
@@ -41,47 +38,12 @@
     }
 
     .price-info {
-      .old-price {
-        color: theming.themed('footer-text');
-      }
       .new-price {
         color: theming.themed('header-text');
       }
     }
-
-    .tags {
-      .discount {
-        background-color: theming.themed('button-bg');
-        color: theming.themed('button-text');
-      }
-    }
   }
   // --- End Theming Block ---
-
-  .card-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 6px 10px;
-
-    .tradeable {
-      color: #7cfa7c;
-      font-size: 12px;
-      display: flex;
-      align-items: center;
-      gap: 5px;
-    }
-
-    .icon {
-      width: 12px;
-      height: 12px;
-    }
-
-    .brand-icon {
-      width: 24px;
-      height: 24px;
-    }
-  }
 
   .skin-image-container {
     padding: 10px;
@@ -89,11 +51,24 @@
     justify-content: center;
     align-items: center;
     min-height: 120px;
+    position: relative; // Necessário para o posicionamento da tag
 
     .skin-image {
       max-width: 100%;
       height: auto;
       transition: transform 0.3s ease;
+    }
+
+    .stattrak-tag {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background-color: #cf6a32; // Laranja escuro, cor típica do StatTrak
+      color: white;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: bold;
     }
   }
 
@@ -120,50 +95,24 @@
       .price-info {
         display: flex;
         flex-direction: column;
-        .old-price {
-          font-size: 12px;
-          text-decoration: line-through;
-        }
         .new-price {
           font-size: 16px;
           font-weight: bold;
-        }
-      }
 
-      .tags {
-        display: flex;
-        flex-direction: column;
-        gap: 4px;
-        align-items: flex-end;
-
-        .souvenir {
-          background-color: #ffc107; // This color can remain static or be themed
-          color: #1a202d;
-          padding: 2px 6px;
-          border-radius: 4px;
-          font-size: 11px;
-          font-weight: bold;
-        }
-
-        .discount {
-          padding: 2px 6px;
-          border-radius: 4px;
-          font-size: 12px;
-          font-weight: bold;
+          &.unavailable {
+            font-size: 14px;
+            font-weight: normal;
+            font-style: italic;
+          }
         }
       }
     }
 
     .wear-info {
       font-size: 12px;
-      color: #c5c5c5;
+      color: #000000;
       margin-top: auto;
       padding-top: 10px;
-
-      .wear-value {
-        margin-bottom: 12px;
-        display: block;
-      }
 
       .wear-bar-container {
         position: relative;
@@ -183,8 +132,9 @@
         transform: translateX(-50%);
         width: 3px;
         height: 14px;
-        background-color: #a2ff8a;
-        border-radius: 1px;
+        background-color: #ffffff;
+        border: 1px solid #4b4b4b;
+        border-radius: 1px solid #000000;
 
         &::after {
           content: '';
@@ -200,5 +150,100 @@
         }
       }
     }
+  }
+
+  .wear-info .skin-rarity {
+    // Estilo simplificado para a condição (ex: Field-Tested)
+    font-style: italic;
+  }
+
+  .buy-button {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 1em;
+    margin-top: 10px;
+
+    &:hover {
+      background-color: #218838;
+    }
+
+    &:disabled {
+      background-color: #5a6268; // Cinza escuro para estado desabilitado
+      cursor: not-allowed;
+      &:hover {
+        background-color: #5a6268; // Mantém a cor no hover
+      }
+    }
+  }
+}
+
+// Estilos do Skeleton Loader
+@keyframes shimmer {
+  0% {
+    background-position: -468px 0;
+  }
+  100% {
+    background-position: 468px 0;
+  }
+}
+
+.skin-card-skeleton {
+  .skeleton {
+    animation: shimmer 1.5s linear infinite;
+    background: #f6f7f8;
+    background-image: linear-gradient(to right, #f6f7f8 0%, #edeef1 20%, #f6f7f8 40%, #f6f7f8 100%);
+    background-repeat: no-repeat;
+    background-size: 800px 104px;
+    display: block;
+    border-radius: 4px;
+  }
+
+  .skeleton-image {
+    height: 140px; // Altura correspondente à imagem
+    margin-bottom: 10px;
+  }
+
+  .skin-info {
+    padding-top: 0;
+  }
+
+  .skeleton-text {
+    height: 20px;
+    width: 80%;
+    margin-bottom: 8px;
+
+    &.short {
+      width: 50%;
+    }
+  }
+
+  .skeleton-price {
+    height: 24px;
+    width: 40%;
+    margin-bottom: 10px;
+  }
+
+  .skeleton-rarity {
+    height: 18px;
+    width: 60%;
+    margin-bottom: 15px;
+  }
+
+  .skeleton-button {
+    height: 40px;
+    width: 100%;
+  }
+}
+
+// Adaptação para o tema escuro
+.dark-theme {
+  .skin-card-skeleton .skeleton {
+    background: #2c2c2c;
+    background-image: linear-gradient(to right, #2c2c2c 0%, #3a3a3a 20%, #2c2c2c 40%, #2c2c2c 100%);
   }
 }

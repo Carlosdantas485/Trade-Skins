@@ -51,6 +51,7 @@
   padding: 15px;
   display: flex;
   flex-direction: column;
+  flex-wrap: wrap;
   flex: 1;
 
   .panel-header {
@@ -71,6 +72,7 @@
 
   .panel-controls {
     display: flex;
+    align-items: center;
     gap: 10px;
     margin-bottom: 15px;
 
@@ -88,53 +90,13 @@
   }
 
   .item-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, 190px);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 15px;
     overflow-y: auto;
     flex-grow: 1;
-    justify-content: center;
-
-    .item-card {
-      border-radius: 6px;
-      padding: 10px;
-      text-align: center;
-
-      img {
-        max-width: 100%;
-        height: auto;
-        margin-bottom: 10px;
-      }
-
-      .item-info {
-        p {
-          margin: 0;
-          font-size: 0.8rem;
-        }
-
-        .price {
-          font-weight: bold;
-          font-size: 0.9rem;
-        }
-      }
-
-      &.special-card {
-        background: linear-gradient(135deg, #8e44ad, #6a4c9c);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-        color: white;
-        font-weight: bold;
-
-        .special-content {
-          .money-icon {
-            font-size: 2rem;
-            margin: 5px 0;
-          }
-        }
-      }
-    }
+    padding: 1px;
   }
 }
 

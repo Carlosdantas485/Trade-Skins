@@ -1,0 +1,8 @@
+<div class="marketplace-container">
+  <h1>Marketplace de Skins</h1>
+  <p>Bem-vindo ao nosso marketplace! Aqui você encontrará as melhores skins para seus jogos.</p>
+
+  <div class="skin-list">
+    <app-skin-card *ngFor="let skin of skins" [skin]="skin"></app-skin-card>
+  </div>
+</div>

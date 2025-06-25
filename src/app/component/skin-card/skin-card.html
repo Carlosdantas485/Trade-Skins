@@ -1,31 +1,40 @@
-<div class="skin-card">
-  <div class="card-header">
-    <span class="tradeable">
-      <img src="/assets/icons/lock-green.svg" alt="Trocável" class="icon"> Trocável
-    </span>
-    <img src="/assets/icons/stattrak.svg" alt="Brand" class="brand-icon">
-  </div>
-  <div class="skin-image-container">
-    <img class="skin-image" src="https://steamcommunity-a.akamaihd.net/economy/image/-9a81dlWLwJ2UUGcVs_nsVtzdOEdtWwKGZZLQHTxDZ7I56KU0Zwwo4NUX4oFJZEHLbXH5ApeO4YmlhxYQknCRvCo04DEVlxkKgpou-6kejhz2v_Nfz5H_uO3mb-Gw_alIITTmn5U-8h-gez--YXygED68hdkMm_1IoCcI1A_aQ6E81nvk-nogcO_tZ-cwHdjuHEqt3vYzRSziQYMMLLcIJ2naA" alt="Desert Eagle Feneco">
-  </div>
-  <div class="skin-info">
-    <p class="skin-name">Desert Eagle <br> Feneco</p>
-    <div class="price-container">
-        <div class="price-info">
-            <span class="old-price">R$ 2.330,00</span>
-            <span class="new-price">R$ 1.806,00</span>
-        </div>
-        <div class="tags">
-            <span class="souvenir">Lembrança</span>
-            <span class="discount">-22%</span>
-        </div>
+<ng-container *ngIf="skin; else loader">
+  <div class="skin-card">
+    <div class="skin-image-container">
+      <img class="skin-image" [src]="skin.imagem" [alt]="skin.name">
+      <span *ngIf="skin.stattrak" class="stattrak-tag">StatTrak™</span>
     </div>
-    <div class="wear-info">
-      <span class="wear-value">MW / 0.086</span>
-      <div class="wear-bar-container">
-        <div class="wear-bar"></div>
-        <div class="wear-indicator" style="left: 12%;"></div>
+    <div class="skin-info">
+      <p class="skin-name">{{ skin.name }}</p>
+      <div class="price-container">
+        <div class="price-info">
+          <span class="new-price" *ngIf="skin.price; else notForSale">{{ skin.price | currency:'BRL':'symbol':'1.2-2' }}</span>
+          <ng-template #notForSale>
+            <span class="new-price unavailable">Indisponível</span>
+          </ng-template>
+        </div>
+      </div>
+      <div class="wear-info">
+        <div class="wear-bar-container" *ngIf="skin.float">
+          <div class="wear-bar"></div>
+          <div class="wear-indicator" [ngStyle]="floatIndicatorStyle"></div>
+        </div>
+        <span class="skin-rarity">{{ skin.condicao }}</span>
       </div>
     </div>
+    <button class="buy-button" [disabled]="!skin.a_venda">COMPRAR</button>
   </div>
-</div>
+</ng-container>
+
+<ng-template #loader>
+  <div class="skin-card skin-card-skeleton">
+    <div class="skeleton skeleton-image"></div>
+    <div class="skin-info">
+      <div class="skeleton skeleton-text"></div>
+      <div class="skeleton skeleton-text short"></div>
+      <div class="skeleton skeleton-price"></div>
+      <div class="skeleton skeleton-rarity"></div>
+      <div class="skeleton skeleton-button"></div>
+    </div>
+  </div>
+</ng-template>

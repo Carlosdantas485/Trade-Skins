@@ -4,7 +4,7 @@
   </a>
 
   <nav class="main-nav">
-    <a mat-button href="#">
+    <a mat-button href="/marketplace">
       <mat-icon>style</mat-icon>
       <span>Skins</span>
     </a>
@@ -17,6 +17,13 @@
       <span>Sell</span>
     </a>
   </nav>
+
+  <div class="search-container">
+    <input type="text" class="search-input" placeholder="Buscar skins..." [(ngModel)]="searchQuery" (keyup.enter)="search()">
+    <button class="search-button" (click)="search()" aria-label="Buscar">
+      <mat-icon>search</mat-icon>
+    </button>
+  </div>
 
   <span class="spacer"></span>
 

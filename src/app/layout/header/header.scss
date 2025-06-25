@@ -1,3 +1,11 @@
+:host {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+}
+
 .logo-image {
   height: 40px;
   margin-right: 16px;
@@ -14,6 +22,84 @@
 .header-actions button[mat-flat-button] {
   mat-icon {
     margin-right: 6px;
+  }
+}
+
+.search-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin: 0 20px;
+
+  .search-input {
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    color: #fff;
+    padding: 8px 40px 8px 15px;
+    width: 250px;
+    transition: all 0.3s ease;
+
+    &::placeholder {
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    &:focus {
+      outline: none;
+      border-color: #4d90fe;
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+  }
+
+  .search-button {
+    position: absolute;
+    right: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    mat-icon {
+      color: rgba(255, 255, 255, 0.7);
+      transition: color 0.3s ease;
+    }
+
+    &:hover mat-icon {
+      color: #fff;
+    }
+  }
+}
+
+// Adaptação para o tema claro
+.light-theme {
+  .search-container {
+    .search-input {
+      background-color: rgba(0, 0, 0, 0.05);
+      border-color: rgba(0, 0, 0, 0.1);
+      color: #333;
+
+      &::placeholder {
+        color: rgba(0, 0, 0, 0.4);
+      }
+
+      &:focus {
+        border-color: #4d90fe;
+        background-color: rgba(0, 0, 0, 0.08);
+      }
+    }
+
+    .search-button mat-icon {
+      color: rgba(0, 0, 0, 0.6);
+
+      &:hover {
+        color: #000;
+      }
+    }
   }
 }
 
