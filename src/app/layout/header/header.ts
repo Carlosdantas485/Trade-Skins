@@ -152,20 +152,24 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.loading.set(true);
     this.errorMessage.set(null);
     
+    // Clear local storage and state first for immediate UI update
+    localStorage.removeItem('neoskins_user');
+    this.authService.clearUser();
+    
+    // Call the logout API
     this.authService.logout()
       .pipe(
         takeUntil(this.destroy$),
         finalize(() => {
           this.loading.set(false);
-          // Ensure we're on the home page after logout
-          if (this.router.url !== '/') {
-            this.router.navigate(['/']);
-          }
+          // Force a full page reload to ensure all state is cleared
+          window.location.href = '/';
         })
       )
       .subscribe({
         next: () => {
-          this.snackBar.open('Successfully logged out', 'Close', {
+          console.log('[Header] Logout successful');
+          this.snackBar.open('Desconectado com sucesso', 'Fechar', {
             duration: 3000,
             horizontalPosition: 'right',
             verticalPosition: 'top',
@@ -173,14 +177,16 @@ export class HeaderComponent implements OnInit, OnDestroy {
           });
         },
         error: (error: any) => {
-          console.error('Logout error:', error);
-          this.errorMessage.set('Failed to log out');
-          this.snackBar.open('Failed to log out. Please try again.', 'Close', {
+          console.error('[Header] Logout error:', error);
+          this.errorMessage.set('Falha ao sair');
+          this.snackBar.open('Falha ao sair. Por favor, tente novamente.', 'Fechar', {
             duration: 5000,
             horizontalPosition: 'right',
             verticalPosition: 'top',
             panelClass: ['error-snackbar']
           });
+          // Still navigate to home even if logout API fails
+          window.location.href = '/';
         }
       });
   }

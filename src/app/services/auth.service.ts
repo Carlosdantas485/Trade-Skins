@@ -191,8 +191,9 @@ export class AuthService {
 
   /**
    * Clear user data
+   * @public
    */
-  private clearUser(): void {
+  clearUser(): void {
     console.log('[Auth] Clearing user data');
     this.currentUser.set(null);
     this.currentUserSubject.next(null);
@@ -200,10 +201,10 @@ export class AuthService {
     
     try {
       localStorage.removeItem(this.USER_KEY);
-      // Clear any other auth-related items
-      localStorage.removeItem('redirectUrl');
+      // Clear any other auth-related data
+      localStorage.removeItem('steam_auth_state');
     } catch (error) {
-      console.error('[Auth] Error clearing user data from storage:', error);
+      console.error('[Auth] Error clearing user data from localStorage:', error);
     }
   }
 }
