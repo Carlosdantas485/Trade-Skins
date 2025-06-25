@@ -31,9 +31,42 @@
     <button mat-icon-button (click)="toggleTheme()" aria-label="Toggle theme">
       <mat-icon>{{ isDarkMode ? 'light_mode' : 'dark_mode' }}</mat-icon>
     </button>
-    <button mat-flat-button color="accent">
-      <mat-icon>login</mat-icon>
-      <span>Login with Steam</span>
-    </button>
+    
+    <!-- User Info Dropdown -->
+    <div *ngIf="isLoggedIn() && currentUser()" class="user-menu" [class.loading]="isLoading()">
+      <button mat-button [matMenuTriggerFor]="userMenu" class="user-button">
+        <img [src]="userAvatar" [alt]="displayName" class="user-avatar">
+        <span class="user-name">{{ displayName }}</span>
+        <mat-icon>arrow_drop_down</mat-icon>
+      </button>
+      <mat-menu #userMenu="matMenu">
+        <a mat-menu-item [href]="currentUser()?.profile || '#'" target="_blank" rel="noopener">
+          <mat-icon>account_circle</mat-icon>
+          <span>Ver perfil na Steam</span>
+        </a>
+        <button mat-menu-item (click)="logout()" [disabled]="isLoading">
+        <mat-icon *ngIf="!isLoading">logout</mat-icon>
+        <mat-spinner *ngIf="isLoading" diameter="20"></mat-spinner>
+          <mat-icon>logout</mat-icon>
+          <span>Sair</span>
+        </button>
+      </mat-menu>
+    </div>
+    
+    <!-- Login Button with Loading State -->
+    <div class="login-button-container">
+      <div *ngIf="isLoading()" class="loading-spinner"></div>
+      <button 
+        *ngIf="!isLoggedIn()" 
+        mat-flat-button 
+        color="accent" 
+        [disabled]="isLoading()"
+        (click)="login()"
+        class="steam-login-button"
+      >
+        <img src="assets/steam-logo.svg" alt="Steam" class="steam-logo">
+        <span>{{ isLoading() ? 'Carregando...' : 'Login com Steam' }}</span>
+      </button>
+    </div>
   </div>
 </mat-toolbar>
